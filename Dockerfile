@@ -30,4 +30,6 @@ RUN PACKAGES="wget libswitch-perl" \
 
 
 COPY --from=build /go/bin/grafana-reporter /usr/local/bin
+RUN mkdir /usr/local/bin/templates
+COPY *.tex /usr/local/bin/templates
 ENTRYPOINT [ "/usr/local/bin/grafana-reporter" ]
