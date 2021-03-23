@@ -7,7 +7,7 @@ RUN make build
 
 # create image
 FROM debian:stretch
-COPY util/texlive.profile /
+COPY reporter/util/texlive.profile /
 
 RUN PACKAGES="wget libswitch-perl" \
         && apt-get update \
@@ -32,4 +32,5 @@ RUN PACKAGES="wget libswitch-perl" \
 COPY --from=build /go/bin/grafana-reporter /usr/local/bin
 RUN mkdir /usr/local/bin/templates
 COPY *.tex /usr/local/bin/templates
+RUN cd /usr/local/bin/
 ENTRYPOINT [ "/usr/local/bin/grafana-reporter" ]
